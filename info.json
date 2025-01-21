@@ -1,13 +1,17 @@
 {
-  "name": "[internal-mod-name]",
+  "name": "Mini-Trains-Lead-the-Way",
   "version": "0.0.0",
-  "title": "[MOD DISPLAY NAME]",
-  "author": "[YOUR MODS.FACTORIO.COM USERNAME]",
-  "homepage": "[HOMEPAGE/REPO URL]",
-  "description": "[SHORT DESCRIPTION]",
+  "title": "Mini Trains Lead the Way",
+  "author": "Indzasa",
+  "homepage": "https://github.com/Indzasa/Mini-Trains-Lead-the-Way",
+  "description": "Make mini trains usable before regular trains.",
   "factorio_version": "2.0",
   "dependencies": [
-    "base"
+    "base",
+	"Mini_Trains",
+	"? space-age",
+	"? aai-industry",
+	"? wood-logistics"
   ],
   "quality_required": false,
   "rail_bridges_required": false,
