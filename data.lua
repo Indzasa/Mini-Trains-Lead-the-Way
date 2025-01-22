@@ -1,17 +1,23 @@
--- remove rails from regular trains technology
+-- remove rails and iron sticks from regular trains technology
 local railway_research = data.raw["technology"]["railway"]
 for k, v in pairs(railway_research.effects) do
 	if v.type == "unlock-recipe" and v.recipe == "rail" then
 		table.remove(railway_research.effects, k)
 	end
+	if v.type == "unlock-recipe" and v.recipe == "iron-stick" then
+		table.remove(railway_research.effects, k)
+	end
 end
 
--- add rails to mini trains technology
+-- add rails and iron sticks to mini trains technology
 local mini_trains_research = data.raw["technology"]["mini-trains"]
 mini_trains_research.prerequisites = { "logistics", "steel-processing" }
 table.insert(mini_trains_research.effects, {type = "unlock-recipe",recipe = "rail"})
+
 if mods["aai-industry"] then
 	table.insert(mini_trains_research.prerequisites, "electronics")
+else
+	table.insert(mini_trains_research.effects, {type = "unlock-recipe",recipe = "iron-stick"})
 end
 
 -- adjust mini trains research to not require logistics science
