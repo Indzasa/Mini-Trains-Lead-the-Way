@@ -70,7 +70,24 @@ if mods["space-age"] then
       },
       time = 60
     }
-	-- TODO change recipe to include tungsten plate if yes option
+	
+	-- change recipes to include tungsten plate if yes option
+	for i, ingredient in pairs(data.raw.recipe["locomotive"].ingredients) do 
+		if ingredient.name == "steel-plate" then
+			ingredient.name = "tungsten-plate"
+		end
+	end
+	for i, ingredient in pairs(data.raw.recipe["cargo-wagon"].ingredients) do 
+		if ingredient.name == "steel-plate" then
+			ingredient.name = "tungsten-plate"
+		end
+	end
+	for i, ingredient in pairs(data.raw.recipe["fluid-wagon"].ingredients) do 
+		if ingredient.name == "steel-plate" then
+			ingredient.name = "tungsten-plate"
+		end
+	end
+	
 else
 	-- change unlock locomotive and wagons (both cargo and fluid) at logistics-3 if no space age
 	table.insert(railway_research.prerequisites, "logistics-3")
@@ -119,31 +136,39 @@ if mods["aai-industry"] then
 	end
 end
 
+-- if wooden logistics and with option: add lumber to mini trains
 if mods["wood-logistics"] then
+	
+	-- loco: 15/10 to 10/5 steel/lumber
 	for i, ingredient in pairs(data.raw.recipe["mini-locomotive"].ingredients) do 
 		if ingredient.name == "steel-plate" then
 			ingredient.amount = 10
 		end
 	end
 	table.insert(data.raw.recipe["mini-locomotive"].ingredients, {type="item", name="lumber", amount=5})
+	
+	-- cargo: 10/0 to 5/5 steel/lumber
+	for i, ingredient in pairs(data.raw.recipe["mini-cargo-wagon"].ingredients) do 
+		if ingredient.name == "steel-plate" then
+			ingredient.amount = 5
+		end
+	end
+	table.insert(data.raw.recipe["mini-cargo-wagon"].ingredients, {type="item", name="lumber", amount=5})
+	
+	-- fluid: 10/0 to 5/5 steel/lumber
+	for i, ingredient in pairs(data.raw.recipe["mini-fluid-wagon"].ingredients) do 
+		if ingredient.name == "steel-plate" then
+			ingredient.amount = 5
+		end
+	end
+	table.insert(data.raw.recipe["mini-fluid-wagon"].ingredients, {type="item", name="lumber", amount=5})
 end
 
--- change recipes
---if mods["wood-logistics"] and (settings.startup["include_lumber"].value == true) then
-	-- if wooden logistics and with option: add lumber to mini trains recipe (x/y steel/lumber "before" to "after")
-		-- loco: 15/10 to 10/5
-		-- cargo: 10/0 to 5/5
-		-- fluid: 10/0 to 5/5
---end
-
 --if (settings.startup["include_mini_trains_in_recipes"].value == true) then
-	-- change locos and wagons recipes to include mini trains
---end
 
--- code from aai-industry
-	-- remove prereq from tech
-	--table.remove(tech.prerequisites, prereq)
-	-- add prereq to tech
-	--table.insert(data.raw.technology[tech].prerequisites, prereq)
-	-- remove unneded pack from tech
-	--table.remove(tech.unit.ingredients, pack)
+-- change locos and wagons recipes to include mini trains
+table.insert(data.raw.recipe["locomotive"].ingredients, {type="item", name="mini-locomotive", amount=1})
+table.insert(data.raw.recipe["cargo-wagon"].ingredients, {type="item", name="mini-cargo-wagon", amount=1})
+table.insert(data.raw.recipe["fluid-wagon"].ingredients, {type="item", name="mini-fluid-wagon", amount=1})
+	
+--end
