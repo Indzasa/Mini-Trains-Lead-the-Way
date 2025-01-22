@@ -1,6 +1,6 @@
 {
   "name": "Mini-Trains-Lead-the-Way",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "title": "Mini Trains Lead the Way",
   "author": "Indzasa",
   "homepage": "https://github.com/Indzasa/Mini-Trains-Lead-the-Way",
@@ -8,10 +8,10 @@
   "factorio_version": "2.0",
   "dependencies": [
     "base",
-	"Mini_Trains",
-	"? space-age",
-	"? aai-industry",
-	"? wood-logistics"
+    "Mini_Trains",
+    "? space-age",
+    "? aai-industry",
+    "? wood-logistics"
   ],
   "quality_required": false,
   "rail_bridges_required": false,
