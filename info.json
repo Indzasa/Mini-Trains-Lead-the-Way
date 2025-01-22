@@ -1,10 +1,10 @@
 {
   "name": "Mini-Trains-Lead-the-Way",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "title": "Mini Trains Lead the Way",
   "author": "Indzasa",
   "homepage": "https://github.com/Indzasa/Mini-Trains-Lead-the-Way",
-  "description": "Make mini trains usable before regular trains.",
+  "description": "Make mini trains mandatory usable before regular trains..",
   "factorio_version": "2.0",
   "dependencies": [
     "base",

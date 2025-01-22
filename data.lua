@@ -41,7 +41,7 @@ stations_research.unit =
 railway_research.prerequisites = { "mini-trains" } -- place trains after mini trains
 
 local fluid_wagon_research = data.raw["technology"]["fluid-wagon"]
-if mods["space-age"] then
+if mods["space-age"] and (settings.startup["mtlw-move-regular-to-vulcanus"].value == true) then
 	-- if space age: change unlock locomotive and wagons (both cargo and fluid) at vulcanus (tungsten plate tech)
 	table.insert(railway_research.prerequisites, "tungsten-steel")
 	railway_research.unit =
@@ -137,7 +137,7 @@ if mods["aai-industry"] then
 end
 
 -- if wooden logistics and with option: add lumber to mini trains
-if mods["wood-logistics"] then
+if mods["wood-logistics"] and (settings.startup["mtlw-replace-some-steel-with-lumber"].value == true) then
 	
 	-- loco: 15/10 to 10/5 steel/lumber
 	for i, ingredient in pairs(data.raw.recipe["mini-locomotive"].ingredients) do 
@@ -164,11 +164,11 @@ if mods["wood-logistics"] then
 	table.insert(data.raw.recipe["mini-fluid-wagon"].ingredients, {type="item", name="lumber", amount=5})
 end
 
---if (settings.startup["include_mini_trains_in_recipes"].value == true) then
+
 
 -- change locos and wagons recipes to include mini trains
+if (settings.startup["mtlw-add-mini-to-regular"].value == true) then
 table.insert(data.raw.recipe["locomotive"].ingredients, {type="item", name="mini-locomotive", amount=1})
 table.insert(data.raw.recipe["cargo-wagon"].ingredients, {type="item", name="mini-cargo-wagon", amount=1})
 table.insert(data.raw.recipe["fluid-wagon"].ingredients, {type="item", name="mini-fluid-wagon", amount=1})
-	
---end
+end
