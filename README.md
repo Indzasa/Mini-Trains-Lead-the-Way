@@ -5,7 +5,7 @@ Mini trains are cute little vehicles from mod [Mini Trains by Klonan](https://mo
 
 # Changes
 
-- Rearanges research tree to make mini trains avaible early (at automation science).
+- Rearranges research tree to make mini trains avaible early (at automation science).
 - Moves regular trains further in research (after logistics 3).
 
 # Optional changes
