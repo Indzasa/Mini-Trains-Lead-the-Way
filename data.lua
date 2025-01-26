@@ -178,3 +178,9 @@ table.insert(data.raw.recipe["locomotive"].ingredients, {type="item", name="mini
 table.insert(data.raw.recipe["cargo-wagon"].ingredients, {type="item", name="mini-cargo-wagon", amount=1})
 table.insert(data.raw.recipe["fluid-wagon"].ingredients, {type="item", name="mini-fluid-wagon", amount=1})
 end
+
+-- Makes Mini Trains a little slower with both max speed and acceleration
+if (settings.startup["mtlw-nerf-mini-trains"].value == true) then
+data.raw["locomotive"]["mini-locomotive"].max_speed = 0.6
+data.raw["locomotive"]["mini-locomotive"].max_power = "210kW"
+end

@@ -17,4 +17,10 @@ data:extend({
 		setting_type = "startup",
 		default_value = true
 	},
+  {
+		type = "bool-setting",
+		name = "mtlw-nerf-mini-trains",
+		setting_type = "startup",
+		default_value = false
+	},
 })
