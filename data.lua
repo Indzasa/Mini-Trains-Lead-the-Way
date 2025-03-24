@@ -179,7 +179,7 @@ if (settings.startup["mtlw-add-mini-to-regular"].value == true) then
 	table.insert(data.raw.recipe["locomotive"].ingredients, {type="item", name="mini-locomotive", amount=1})
 	if settings.startup["wood-logistics-cargo-wagon"].value == true then
 		-- don't add mini wagon to cargo wagon if there is wooden wagon involved, add it to the wooden wagon instead
-		table.insert(data.raw.recipe["cargo-wagon"].ingredients, {type="item", name="wood-cargo-wagon", amount=1})	
+		table.insert(data.raw.recipe["wood-cargo-wagon"].ingredients, {type="item", name="mini-cargo-wagon", amount=1})	
 	else
 		table.insert(data.raw.recipe["cargo-wagon"].ingredients, {type="item", name="mini-cargo-wagon", amount=1})		
 	end
