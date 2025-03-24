@@ -82,10 +82,12 @@ if mods["space-age"] and (settings.startup["mtlw-move-regular-to-vulcanus"].valu
 		if ingredient.name == "steel-plate" then
 			ingredient.name = "tungsten-plate"
 		end
-	end
-	for i, ingredient in pairs(data.raw.recipe["cargo-wagon"].ingredients) do 
-		if ingredient.name == "steel-plate" then
-			ingredient.name = "tungsten-plate"
+	end	
+	if settings.startup["wood-logistics-cargo-wagon"].value == false then
+		for i, ingredient in pairs(data.raw.recipe["cargo-wagon"].ingredients) do 
+			if ingredient.name == "steel-plate" then
+				ingredient.name = "tungsten-plate"
+			end
 		end
 	end
 	for i, ingredient in pairs(data.raw.recipe["fluid-wagon"].ingredients) do 
@@ -174,13 +176,18 @@ end
 
 -- change locos and wagons recipes to include mini trains
 if (settings.startup["mtlw-add-mini-to-regular"].value == true) then
-table.insert(data.raw.recipe["locomotive"].ingredients, {type="item", name="mini-locomotive", amount=1})
-table.insert(data.raw.recipe["cargo-wagon"].ingredients, {type="item", name="mini-cargo-wagon", amount=1})
-table.insert(data.raw.recipe["fluid-wagon"].ingredients, {type="item", name="mini-fluid-wagon", amount=1})
+	table.insert(data.raw.recipe["locomotive"].ingredients, {type="item", name="mini-locomotive", amount=1})
+	if settings.startup["wood-logistics-cargo-wagon"].value == true then
+		-- don't add mini wagon to cargo wagon if there is wooden wagon involved, add it to the wooden wagon instead
+		table.insert(data.raw.recipe["cargo-wagon"].ingredients, {type="item", name="wood-cargo-wagon", amount=1})	
+	else
+		table.insert(data.raw.recipe["cargo-wagon"].ingredients, {type="item", name="mini-cargo-wagon", amount=1})		
+	end
+	table.insert(data.raw.recipe["fluid-wagon"].ingredients, {type="item", name="mini-fluid-wagon", amount=1})
 end
 
 -- Makes Mini Trains a little slower with both max speed and acceleration
 if (settings.startup["mtlw-nerf-mini-trains"].value == true) then
-data.raw["locomotive"]["mini-locomotive"].max_speed = 0.6
-data.raw["locomotive"]["mini-locomotive"].max_power = "210kW"
+	data.raw["locomotive"]["mini-locomotive"].max_speed = 0.6
+	data.raw["locomotive"]["mini-locomotive"].max_power = "210kW"
 end

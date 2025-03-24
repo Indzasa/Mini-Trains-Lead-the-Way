@@ -2,7 +2,7 @@
 Version: 1.1.0
 Date: 2025-01-26
   Features:
-    - adds an option to make mini trains a little slower (max speed and acceleration
+    - adds an option to make mini trains a little slower (max speed and acceleration)
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 2025-01-22
