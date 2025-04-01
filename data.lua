@@ -144,10 +144,18 @@ end
 table.insert(PSP_techbology.prerequisites, "mini-trains")
 
 -- if AAI industry: change recipe multi cilinder engine to single-cylinder engine
+-- if no AAI industry: change engine unit to iron gear wheel so it will be available at automation science
 if mods["aai-industry"] then
 	for i, ingredient in pairs(data.raw.recipe["mini-locomotive"].ingredients) do 
 		if ingredient.name == "engine-unit" then
 			ingredient.name = "motor"
+		end
+	end
+else
+	for i, ingredient in pairs(data.raw.recipe["mini-locomotive"].ingredients) do 
+		if ingredient.name == "engine-unit" then
+			ingredient.name = "iron-gear-wheel"
+			ingredient.amount = 10
 		end
 	end
 end
