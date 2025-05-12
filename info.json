@@ -1,6 +1,6 @@
 {
   "name": "Mini-Trains-Lead-the-Way",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "title": "Mini Trains Lead the Way",
   "author": "Indzasa",
   "homepage": "https://github.com/Indzasa/Mini-Trains-Lead-the-Way",
@@ -12,7 +12,7 @@
     "? space-age",
     "? aai-industry",
     "? wood-logistics",
-	"(?) pypostprocessing"
+    "(?) pypostprocessing"
   ],
   "quality_required": false,
   "rail_bridges_required": false,
