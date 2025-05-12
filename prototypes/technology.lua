@@ -56,64 +56,68 @@ railway_research.unit =
   time = 15
 }
 
--- Changes for fluid wagons:
-local fluid_wagon_research = data.raw["technology"]["fluid-wagon"]
+-- Changes for fluid wagons and other techs (don't apply in py):
+if not mods["pypostprocessing"] then
 
--- adjust fluid wagon research to require mini trains technology instead of regular trains
-for i = #fluid_wagon_research.prerequisites, 1, -1 do
-  if fluid_wagon_research.prerequisites[i] == "railway" then
-	table.remove(fluid_wagon_research.prerequisites, i)
-  end
-end
-table.insert(fluid_wagon_research.prerequisites, "mini-trains")
+	local fluid_wagon_research = data.raw["technology"]["fluid-wagon"]
 
--- change fluid wagon research to unlock mini fluid wagon instead of regular fluid wagon
-for k, v in pairs(fluid_wagon_research.effects) do
-	table.insert(fluid_wagon_research.effects, {type = "unlock-recipe",recipe = "mini-fluid-wagon"})	
-	if v.type == "unlock-recipe" and v.recipe == "fluid-wagon" then
-		table.remove(fluid_wagon_research.effects, k)
+	-- adjust fluid wagon research to require mini trains technology instead of regular trains
+	for i = #fluid_wagon_research.prerequisites, 1, -1 do
+	  if fluid_wagon_research.prerequisites[i] == "railway" then
+		table.remove(fluid_wagon_research.prerequisites, i)
+	  end
 	end
-end
+	table.insert(fluid_wagon_research.prerequisites, "mini-trains")
 
--- remove mini fluid wagon from mini trains research
-local mini_trains_research = data.raw["technology"]["mini-trains"]
-for k, v in pairs(mini_trains_research.effects) do
-	if v.type == "unlock-recipe" and v.recipe == "mini-fluid-wagon" then
-		table.remove(mini_trains_research.effects, k)
+	-- change fluid wagon research to unlock mini fluid wagon instead of regular fluid wagon
+	for k, v in pairs(fluid_wagon_research.effects) do
+		table.insert(fluid_wagon_research.effects, {type = "unlock-recipe",recipe = "mini-fluid-wagon"})	
+		if v.type == "unlock-recipe" and v.recipe == "fluid-wagon" then
+			table.remove(fluid_wagon_research.effects, k)
+		end
 	end
+
+	-- remove mini fluid wagon from mini trains research
+	local mini_trains_research = data.raw["technology"]["mini-trains"]
+	for k, v in pairs(mini_trains_research.effects) do
+		if v.type == "unlock-recipe" and v.recipe == "mini-fluid-wagon" then
+			table.remove(mini_trains_research.effects, k)
+		end
+	end
+
+	-- add fuild wagon to regular trains research
+	table.insert(railway_research.effects, {type = "unlock-recipe",recipe = "fluid-wagon"})
+
+	-- adjust fluid wagon research cost to require just automation and logistic science
+	fluid_wagon_research.unit =
+	{
+	  count = 120,
+	  ingredients =
+	  {
+		{"automation-science-pack", 1},
+		{"logistic-science-pack", 1},
+	  },
+	  time = 20
+	}
+
+	-- adjust production science to have mini trains as prereq instead
+	local PSP_technology = data.raw["technology"]["production-science-pack"]
+	for i = #PSP_technology.prerequisites, 1, -1 do
+	  if PSP_technology.prerequisites[i] == "railway" then
+		table.remove(PSP_technology.prerequisites, i)
+	  end
+	end
+	table.insert(PSP_technology.prerequisites, "mini-trains")
+
+	-- adjust braking force technologies
+	local brake1_technology = data.raw["technology"]["braking-force-1"]
+	local brake3_technology = data.raw["technology"]["braking-force-3"]
+	for i = #brake1_technology.prerequisites, 1, -1 do
+	  if brake1_technology.prerequisites[i] == "railway" then
+		table.remove(brake1_technology.prerequisites, i)
+	  end
+	end
+	table.insert(brake1_technology.prerequisites, "mini-trains")
+	table.insert(brake3_technology.prerequisites, "railway")
+
 end
-
--- add fuild wagon to regular trains research
-table.insert(railway_research.effects, {type = "unlock-recipe",recipe = "fluid-wagon"})
-
--- adjust fluid wagon research cost to require just automation and logistic science
-fluid_wagon_research.unit =
-{
-  count = 120,
-  ingredients =
-  {
-	{"automation-science-pack", 1},
-	{"logistic-science-pack", 1},
-  },
-  time = 20
-}
-
--- adjust production science to have mini trains as prereq instead
-local PSP_technology = data.raw["technology"]["production-science-pack"]
-for i = #PSP_technology.prerequisites, 1, -1 do
-  if PSP_technology.prerequisites[i] == "railway" then
-	table.remove(PSP_technology.prerequisites, i)
-  end
-end
-table.insert(PSP_technology.prerequisites, "mini-trains")
-
--- adjust braking force technologies
-local brake1_technology = data.raw["technology"]["braking-force-1"]
-local brake3_technology = data.raw["technology"]["braking-force-3"]
-for i = #brake1_technology.prerequisites, 1, -1 do
-  if brake1_technology.prerequisites[i] == "railway" then
-	table.remove(brake1_technology.prerequisites, i)
-  end
-end
-table.insert(brake1_technology.prerequisites, "mini-trains")
-table.insert(brake3_technology.prerequisites, "railway")
