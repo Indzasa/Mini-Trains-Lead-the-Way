@@ -17,7 +17,7 @@ jobs:
         id: extract_version
         run: |
           # Извлекаем версию мода из info.json
-          $version = Get-Content -Path "D:\Development\Mini-Trains-Lead-the-Way\info.json" | ConvertFrom-Json | Select-Object -ExpandProperty version
+          $version = Get-Content -Path "D:/Development/Mini-Trains-Lead-the-Way/info.json" | ConvertFrom-Json | Select-Object -ExpandProperty version
           echo "::set-output name=mod_version::$version"
 
       - name: Archive mod folder
@@ -28,7 +28,7 @@ jobs:
           $archive_name = "$mod_name_$mod_version.zip"
           
           # Создаем архив в папке D:\Development
-          powershell -Command "Compress-Archive -Path 'D:\Development\Mini-Trains-Lead-the-Way\*' -DestinationPath 'D:\Development\$archive_name' -Force"
+          powershell -Command "Compress-Archive -Path 'D:/Development/Mini-Trains-Lead-the-Way/*' -DestinationPath 'D:/Development/$archive_name' -Force"
 
       - name: Copy mod archive to Factorio mods folder
         run: |
@@ -37,4 +37,4 @@ jobs:
           $mod_version = "${{ steps.extract_version.outputs.mod_version }}"
           $archive_name = "$mod_name_$mod_version.zip"
           
-          copy /Y "D:\Development\$archive_name" "C:\Users\Indzasa\AppData\Roaming\Factorio\mods\$archive_name"
+          copy /Y "D:/Development/$archive_name" "C:/Users/Indzasa/AppData/Roaming/Factorio/mods/$archive_name"
