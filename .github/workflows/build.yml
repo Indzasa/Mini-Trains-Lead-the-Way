@@ -17,6 +17,7 @@ jobs:
         id: extract_version
         run: |
           Write-Host "# Извлекаем версию мода из info.json"
+          echo "::debug::This is a debug message"
           $version = Get-Content -Path "D:/Development/Mini-Trains-Lead-the-Way/info.json" | ConvertFrom-Json | Select-Object -ExpandProperty version
           echo "::set-output name=mod_version::$version"
 
