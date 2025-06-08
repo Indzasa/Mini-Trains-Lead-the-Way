@@ -3,7 +3,6 @@ name: Build
 on:
   push:
     branches:
-      - main
       - test
 
 jobs:
@@ -15,27 +14,30 @@ jobs:
 
       - name: Extract mod version
         id: extract_version
+        shell: pwsh
         run: |
           # Извлекаем версию мода из info.json"
           $version = Get-Content -Path "D:/Development/Mini-Trains-Lead-the-Way/info.json" | ConvertFrom-Json | Select-Object -ExpandProperty version
-          echo "::set-output name=mod_version::$version"
+          echo "mod_version=$version" >> $env:GITHUB_OUTPUT
 
       - name: Archive mod folder
+        shell: pwsh
+        env:
+          MOD_VERSION: ${{ steps.extract_version.outputs.mod_version }}
         run: |
-          # Создаем имя архива с учетом версии
-          $mod_name = "Mini-Trains-Lead-the-Way"  # Замените на имя вашего мода
-          $mod_version = "${{ steps.extract_version.outputs.mod_version }}"
-          $archive_name = "$mod_name_$mod_version.zip"
+          # Создаем имя архива с учетом версии             
+          $mod_name = "Mini-Trains-Lead-the-Way"
+          $archive_name = "$mod_name_$env:MOD_VERSION.zip"
           
           # Создаем архив в папке D:\Development
-          powershell -Command "Compress-Archive -Path 'D:/Development/Mini-Trains-Lead-the-Way/*' -DestinationPath 'D:/Development/$archive_name' -Force"
+          Compress-Archive -Path 'D:/Development/Mini-Trains-Lead-the-Way/*' -DestinationPath "D:/Development/$archive_name" -Force          
 
       - name: Copy mod archive to Factorio mods folder
+        shell: pwsh
+        env:
+          MOD_VERSION: ${{ steps.extract_version.outputs.mod_version }}
         run: |
-          # Копируем архив в папку с модами Factorio
-          $mod_name = "Mini-Trains-Lead-the-Way"  # Замените на имя вашего мода
-          $mod_version = "${{ steps.extract_version.outputs.mod_version }}"
-          $archive_name = "$mod_name_$mod_version.zip"
-          
-          Copy-Item -Path "D:\Development\$archive_name" -Destination "C:\Users\Indzasa\AppData\Roaming\Factorio\mods\$archive_name" -Force
-
+          # Копируем архив в папку с модами Factorio                 
+          $mod_name = "Mini-Trains-Lead-the-Way"
+          $archive_name = "$mod_name_$env:MOD_VERSION.zip"
+          Copy-Item -Path "D:/Development/$archive_name" -Destination "C:/Users/Indzasa/AppData/Roaming/Factorio/mods/$archive_name" -Force
