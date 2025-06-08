@@ -16,8 +16,7 @@ jobs:
       - name: Extract mod version
         id: extract_version
         run: |
-          Write-Host "# Извлекаем версию мода из info.json"
-          echo "::debug::This is a debug message"
+          # Извлекаем версию мода из info.json"
           $version = Get-Content -Path "D:/Development/Mini-Trains-Lead-the-Way/info.json" | ConvertFrom-Json | Select-Object -ExpandProperty version
           echo "::set-output name=mod_version::$version"
 
@@ -38,4 +37,5 @@ jobs:
           $mod_version = "${{ steps.extract_version.outputs.mod_version }}"
           $archive_name = "$mod_name_$mod_version.zip"
           
-          copy /Y "D:/Development/$archive_name" "C:/Users/Indzasa/AppData/Roaming/Factorio/mods/$archive_name"
+          Copy-Item -Path "D:\Development\$archive_name" -Destination "C:\Users\Indzasa\AppData\Roaming\Factorio\mods\$archive_name" -Force
+
