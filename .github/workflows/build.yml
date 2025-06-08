@@ -37,7 +37,7 @@ jobs:
         env:
           MOD_VERSION: ${{ steps.extract_version.outputs.mod_version }}
         run: |
-          # Копируем архив в папку с модами Factorio                 
+          # Копируем архив в папку с  модами Factorio                 
           $mod_name = "Mini-Trains-Lead-the-Way"
           $archive_name = "$mod_name_$env:MOD_VERSION.zip"
           Copy-Item -Path "D:/Development/$archive_name" -Destination "C:/Users/Indzasa/AppData/Roaming/Factorio/mods/$archive_name" -Force
