@@ -42,22 +42,24 @@ stations_research.unit =
 railway_research.prerequisites = { "mini-trains" } -- place trains after mini trains
 
 -- change unlock locomotive and cargo wagons at logistics-3 if no space age
-table.insert(railway_research.prerequisites, "logistics-3")
-railway_research.unit =
-{
-  count = 300,
-  ingredients =
-  {
-	{"automation-science-pack", 1},
-	{"logistic-science-pack", 1},
-	{"chemical-science-pack", 1},
-	{"production-science-pack", 1}
-  },
-  time = 15
-}
+if not mods["248k-Redux"] then
+	table.insert(railway_research.prerequisites, "logistics-3")
+	railway_research.unit =
+	{
+	  count = 300,
+	  ingredients =
+	  {
+		{"automation-science-pack", 1},
+		{"logistic-science-pack", 1},
+		{"chemical-science-pack", 1},
+		{"production-science-pack", 1}
+	  },
+	  time = 15
+	}
+end
 
--- Changes for fluid wagons and other techs (don't apply in py):
-if not mods["pypostprocessing"] then
+-- Changes for fluid wagons and other techs (don't apply in py or 248k):
+if not (mods["pypostprocessing"] or mods["248k-Redux"]) then
 
 	local fluid_wagon_research = data.raw["technology"]["fluid-wagon"]
 
