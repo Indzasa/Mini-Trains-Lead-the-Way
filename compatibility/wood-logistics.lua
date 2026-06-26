@@ -1,6 +1,6 @@
-if not mods["wood-logistics"] then return end
+if not (data.raw["item"] and data.raw["item"]["lumber"]) then return end
 
--- if wooden logistics and with option: add lumber to mini trains
+-- if there is lumber and with option: add lumber to mini trains
 if settings.startup["mtlw-replace-some-steel-with-lumber"] then
 	-- loco: 15/10 to 10/5 steel/lumber
 	for i, ingredient in pairs(data.raw.recipe["mini-locomotive"].ingredients) do 
@@ -26,6 +26,8 @@ if settings.startup["mtlw-replace-some-steel-with-lumber"] then
 	end
 	table.insert(data.raw.recipe["mini-fluid-wagon"].ingredients, {type="item", name="lumber", amount=5})
 end
+
+if not mods["wood-logistics"] then return end
 
 if settings.startup["wood-logistics-cargo-wagon"].value == true then
 	-- don't add mini wagon to cargo wagon's recipe if there is wooden wagon involved, add it to the wooden wagon's recipe instead
