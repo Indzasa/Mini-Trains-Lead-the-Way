@@ -5,7 +5,7 @@
   "author": "Indzasa",
   "homepage": "https://github.com/Indzasa/Mini-Trains-Lead-the-Way",
   "description": "Make mini trains mandatory usable before regular trains.",
-  "factorio_version": "2.0",
+  "factorio_version": "2.1",
   "dependencies": [
     "base",
     "Mini_Trains",
